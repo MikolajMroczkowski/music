@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/tone@next/build/Tone.js"></script>
+    <script src="assets/js/player.js" async></script>
+</head>
+<body>
+<p id="np"></p>
+<button onclick="play()"> aa</button>
+<button onclick="stop()"> aa</button>
+<button onclick="next()"> Next</button>
+<input type="file" multiple="multiple" onchange="addFile()" />
+<input type="range" min="10" value="100" max="400" oninput="changeSpeed(this)">
+<input type="range" min="-24" max="24" oninput="changePitch(this)">
+<input type="range" min="10" value="100" max="400" oninput="changePB(this)">
+<ol id="list">
+
+</ol>
+
+</body>
+</html>
