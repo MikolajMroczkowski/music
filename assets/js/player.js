@@ -1,6 +1,11 @@
 shiftToSemitones = shift => -12*Math.log2(1/shift)
+shuffle = unshuffled =>unshuffled
+    .map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
 var pitchShift = new Tone.PitchShift({
     pitch: shiftToSemitones(1)*-1,
+    windowSize:0.08
 }).toDestination();
 let player = {disconnect:()=>{}}
 let pitch = 0;
@@ -32,17 +37,23 @@ async function addFile() {
     await load()
 
 }
+
 async function load(){
      music = await caches.open('music');
     const request = '/info.json';
     const response = await music.match(request);
     info = await response.json()
+    info = info.reverse()
     console.log(info)
+    render()
+
+}
+function render(){
     const list = document.getElementById("list")
+    list.innerText=""
     for (let i = 0; i < info.length; i++) {
         list.innerHTML+=(`<li onclick="getTrack(${i})">${info[i].name}</li>`)
     }
-
 }
 function play () {
     if(initPlay){
